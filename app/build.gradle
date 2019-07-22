@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.me.cifastlanesample"
+
+        minSdkVersion 19
+        targetSdkVersion 28
+
+        versionCode project.property('versionCode') as Integer
+        versionName project.property('versionName')
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.legacy:legacy-support-core-utils:1.0.0'
+
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_version"
+    implementation "io.reactivex.rxjava2:rxjava:$rx_version"
+
+    implementation "com.jakewharton:butterknife:8.4.0"
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    testImplementation "junit:junit:4.12"
+    testImplementation "org.assertj:assertj-core:2.0.0"
+
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+}
